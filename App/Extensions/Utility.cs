@@ -88,8 +88,7 @@ namespace SharedUtils.Extensions
 
         public static bool IsNumeric(this object value)
         {
-            double retNum;
-            bool isNum = Double.TryParse(Convert.ToString(value), System.Globalization.NumberStyles.Any, System.Globalization.NumberFormatInfo.InvariantInfo, out retNum);
+            bool isNum = Double.TryParse(Convert.ToString(value), System.Globalization.NumberStyles.Any, System.Globalization.NumberFormatInfo.InvariantInfo, out double retNum);
             return isNum;
         }
 
@@ -99,8 +98,7 @@ namespace SharedUtils.Extensions
         {
             if ((boolValue != null) && !object.ReferenceEquals(boolValue, DBNull.Value) && boolValue.ToString().Length > 0)
             {
-                bool ret = false;
-                bool convHappened = bool.TryParse(ToFormattedString(boolValue), out ret);
+                bool convHappened = bool.TryParse(ToFormattedString(boolValue), out bool ret);
                 if (convHappened)
                 {
                     return ret;
@@ -149,7 +147,6 @@ namespace SharedUtils.Extensions
             if ((value != null) && (IsNumeric(value)))
             {
                 //theReturn = CDbl(doubleValue.ToString)
-                double tmp = 0;
                 string doubleStr = null;
                 if (((value) is double))
                 {
@@ -165,14 +162,14 @@ namespace SharedUtils.Extensions
                 {
                     doubleStr = value.ToString();
                 }
-                if (double.TryParse(doubleStr, System.Globalization.NumberStyles.Any, culture, out tmp))
+                if (double.TryParse(doubleStr, System.Globalization.NumberStyles.Any, culture, out double tmp))
                 {
                     theReturn = tmp;
                 }
             }
             return theReturn;
         }
-
+        
         #endregion
 
         #region "Integer"
@@ -206,15 +203,13 @@ namespace SharedUtils.Extensions
                 //theReturn = CDbl(doubleValue.ToString)
 
                 //first see if it is a float
-                double dbl = 0;
-                if (double.TryParse(intValue.ToString(), System.Globalization.NumberStyles.Any, nmFrmInfo, out dbl))
+                if (double.TryParse(intValue.ToString(), System.Globalization.NumberStyles.Any, nmFrmInfo, out double dbl))
                 {
                     theReturn = Convert.ToInt32(Math.Floor(dbl));
                     return theReturn;
                 }
 
-                int tmp = 0;
-                if (int.TryParse(intValue.ToString(), System.Globalization.NumberStyles.Any, nmFrmInfo, out tmp))
+                if (int.TryParse(intValue.ToString(), System.Globalization.NumberStyles.Any, nmFrmInfo, out int tmp))
                 {
                     theReturn = tmp;
                 }
@@ -232,6 +227,16 @@ namespace SharedUtils.Extensions
             return value.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
         }
 
+        public static DateTime FromUnixTimestamp(this double timestamp,DateTimeKind kind)
+        {
+            DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0, kind);
+            return origin.AddSeconds(timestamp);
+        }
+        public static DateTime FromUnixTimestamp(this double timestamp)
+        {
+            return timestamp.FromUnixTimestamp(DateTimeKind.Unspecified);
+        }
+
         public static DateTime? ToNullableDateTime(this object value)
         {
             return value.ToNullableDateTime(System.Globalization.CultureInfo.CurrentCulture);
@@ -245,9 +250,8 @@ namespace SharedUtils.Extensions
             Nullable<DateTime> theDate = default(Nullable<DateTime>);
             if ((datevalue != null) && (!object.ReferenceEquals(datevalue, DBNull.Value)) && (datevalue.ToString().Length > 0))
             {
-                DateTime dDate = default(DateTime);
                 //i want to use assumeuniversal, but that doesn't seem to do anything
-                if (DateTime.TryParse(datevalue.ToString(), cultureType, System.Globalization.DateTimeStyles.AdjustToUniversal, out dDate))
+                if (DateTime.TryParse(datevalue.ToString(), cultureType, System.Globalization.DateTimeStyles.AdjustToUniversal, out DateTime dDate))
                 {
                     if (dDate <= System.DateTime.MinValue | dDate > System.DateTime.MaxValue)
                     {

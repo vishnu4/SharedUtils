@@ -134,13 +134,13 @@ namespace SharedUtils.Tests.Extensions
         ReturnFormattedXmlElement;
         */
 
-        //doesn't work, the seconds are off for some reason
+        ////doesn't work, the millseconds are off for some reason
         //[TestMethod]
         //public void ConvertToUnixTimestamp_ConvertUnixTimestamp_ConversionBackAndForth()
         //{
         //    DateTime d = System.DateTime.Now;
-        //    double dDate = SharedMethods.ConvertToUnixTimestamp(d);
-        //    DateTime d2 = SharedMethods.ConvertUnixTimestamp(dDate);
+        //    double dDate = d.ToUnixTimestamp();
+        //    DateTime d2 = dDate.FromUnixTimestamp();
         //    Assert.AreEqual(d, d2);
         //}
 
