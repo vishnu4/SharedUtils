@@ -19,7 +19,7 @@ namespace SharedUtils.Extensions
             MemberInfo[] memberinfo = type.GetTypeInfo().GetMember(element.ToString());
             if (memberinfo != null && memberinfo.Any())
             {
-                IEnumerable<System.Attribute> attributes = memberinfo[0].GetCustomAttributes(typeof(DescriptionAttribute), false);
+                IEnumerable<System.Attribute> attributes =(IEnumerable<System.Attribute>) memberinfo[0].GetCustomAttributes(typeof(DescriptionAttribute), false);
                 if (attributes != null && attributes.Any())
                 {
                     return ((DescriptionAttribute)attributes.FirstOrDefault()).Description;
