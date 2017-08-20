@@ -144,6 +144,15 @@ namespace SharedUtils.Tests.Extensions
             Assert.IsFalse(string.IsNullOrEmpty(s3));
         }
 
+        [TestMethod]
+        public void GetRandomString_Are2DifferentCallsActuallyRandom()
+        {
+            const int stringLength = 10;
+            string s1 = Utility.GetRandomString(stringLength);
+            string s2 = Utility.GetRandomString(stringLength);
+            Assert.AreNotEqual(s1, s2);
+        }
+
         /*
          ScrubHtml
         IsValidPhoneNumber

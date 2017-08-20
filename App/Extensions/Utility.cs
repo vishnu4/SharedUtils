@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace SharedUtils.Extensions
 {
-    public static class Utiliy
+    public static class Utility
     {
 
         public static Guid ToGUID(this object guidValue)
@@ -69,6 +69,27 @@ namespace SharedUtils.Extensions
         {
             return ToFormattedString(stringValue, true);
         }
+
+        public static string GetRandomString(int stringlength)
+        {
+            //https://stackoverflow.com/questions/1344221/how-can-i-generate-random-alphanumeric-strings-in-c
+            char[] chars = new char[62];
+            chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890".ToCharArray();
+            byte[] data = new byte[1];
+            using (System.Security.Cryptography.RNGCryptoServiceProvider crypto = new System.Security.Cryptography.RNGCryptoServiceProvider())
+            {
+                crypto.GetNonZeroBytes(data);
+                data = new byte[stringlength];
+                crypto.GetNonZeroBytes(data);
+            }
+            StringBuilder result = new StringBuilder(stringlength);
+            foreach (byte b in data)
+            {
+                result.Append(chars[b % (chars.Length)]);
+            }
+            return result.ToString();
+        }
+
         #endregion
 
         public static bool IsNumeric(this object value)
