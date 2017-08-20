@@ -72,6 +72,19 @@ namespace SharedUtils.Tests.Extensions
         }
 
         [TestMethod]
+        public void DoubleObject_AlmostEquals()
+        {
+            double d1 = 11.1111;
+            double d2 = 22.2222;
+            double d2a = 22.2221;
+            double d3 = 33;
+            double d3a = 33.00000001;
+            Assert.IsFalse(d1.AlmostEquals(d2));
+            Assert.IsFalse(d2.AlmostEquals(d2a));
+            Assert.IsTrue(d3.AlmostEquals(d3a));
+        }
+
+        [TestMethod]
         public void FormatIntegerObject_DoesRandomTextGiveNullValue()
         {
             int? i = randomText.ToNullableInteger();
@@ -84,6 +97,7 @@ namespace SharedUtils.Tests.Extensions
             bool? b = randomText.ToNullableBoolean();
             Assert.IsNull(b);
         }
+
 
         [TestMethod]
         public void FormatBooleanObject_DoesTrueStringGiveTrueValue()
@@ -124,9 +138,14 @@ namespace SharedUtils.Tests.Extensions
             const string whitespaceText = "   ";
             string s = whitespaceText.ToFormattedString();
             Assert.IsTrue(string.IsNullOrEmpty(s));
+            string s2 = "0".ToFormattedString();
+            Assert.IsTrue(string.IsNullOrEmpty(s2));
+            string s3 = "0".ToFormattedString(false);
+            Assert.IsFalse(string.IsNullOrEmpty(s3));
         }
 
         /*
+         ScrubHtml
         IsValidPhoneNumber
         FormatAddress;
         FormatURIObject;

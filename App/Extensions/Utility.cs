@@ -13,21 +13,6 @@ namespace SharedUtils.Extensions
     public static class Utiliy
     {
 
-        public static string GetDescription(this Enum element)
-        {
-            Type type = element.GetType();
-            MemberInfo[] memberinfo = type.GetTypeInfo().GetMember(element.ToString());
-            if (memberinfo != null && memberinfo.Any())
-            {
-                IEnumerable<System.Attribute> attributes =(IEnumerable<System.Attribute>) memberinfo[0].GetCustomAttributes(typeof(DescriptionAttribute), false);
-                if (attributes != null && attributes.Any())
-                {
-                    return ((DescriptionAttribute)attributes.FirstOrDefault()).Description;
-                }
-            }
-            return element.ToString();
-        }
-
         public static Guid ToGUID(this object guidValue)
         {
             Guid g = Guid.Empty;
@@ -65,7 +50,7 @@ namespace SharedUtils.Extensions
                 if (stringValue.ToString().Trim().Length > 0)
                 {
                     //treating zeros as nulls
-                    if ((object.ReferenceEquals(stringValue.GetType(), typeof(int))) && stringValue.ToString().Trim() == "0" && treatZeroAsEmpty)
+                    if (stringValue.ToString().Trim() == "0" && treatZeroAsEmpty)
                     {
                         return string.Empty;
                     }
