@@ -12,6 +12,10 @@ namespace SharedUtils.ExceptionHandling
         private readonly string m_fileLocation;
         public FileExceptionHandler(string fileLocation)
         {
+            if (System.IO.File.Exists(m_fileLocation))
+            {
+                System.IO.File.Create(fileLocation);
+            }
             m_fileLocation = fileLocation;
         }
 
