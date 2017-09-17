@@ -149,7 +149,7 @@ namespace SharedUtils.Extensions
         }
         public static double? ToNullableDouble(this object value, System.Globalization.CultureInfo culture)
         {
-            Nullable<double> theReturn = null;
+            double? theReturn = null;
             if ((value != null) && (IsNumeric(value)))
             {
                 //theReturn = CDbl(doubleValue.ToString)
@@ -175,7 +175,7 @@ namespace SharedUtils.Extensions
             }
             return theReturn;
         }
-        
+
         #endregion
 
         #region "Integer"
@@ -201,7 +201,7 @@ namespace SharedUtils.Extensions
 
         public static int? ToNullableInteger(this object intValue, System.Globalization.NumberFormatInfo nmFrmInfo)
         {
-            Nullable<int> theReturn = null;
+            int? theReturn = null;
             if (intValue != null)
             {
                 //if (IsNumeric(intValue) | intValue.ToString() == "0")
@@ -233,7 +233,7 @@ namespace SharedUtils.Extensions
             return value.Subtract(new DateTime(1970, 1, 1)).TotalSeconds;
         }
 
-        public static DateTime FromUnixTimestamp(this double timestamp,DateTimeKind kind)
+        public static DateTime FromUnixTimestamp(this double timestamp, DateTimeKind kind)
         {
             DateTime origin = new DateTime(1970, 1, 1, 0, 0, 0, 0, kind);
             return origin.AddSeconds(timestamp);
@@ -253,7 +253,7 @@ namespace SharedUtils.Extensions
         }
         public static DateTime? ToNullableDateTime(this object datevalue, System.Globalization.CultureInfo cultureType, DateTimeKind dateKind)
         {
-            Nullable<DateTime> theDate = default(Nullable<DateTime>);
+            DateTime? theDate = default(DateTime?);
             if ((datevalue != null) && (!object.ReferenceEquals(datevalue, DBNull.Value)) && (datevalue.ToString().Length > 0))
             {
                 //i want to use assumeuniversal, but that doesn't seem to do anything

@@ -4,6 +4,10 @@
     <TargetFramework>netstandard2.0</TargetFramework>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <NoWarn>1701;1702;1705;CC0001;CC0105;IDE1006;CC0037</NoWarn>
+  </PropertyGroup>
+
   <ItemGroup>
     <PackageReference Include="system.componentmodel.primitives" Version="4.3.0" />
     <PackageReference Include="System.Data.Common" Version="4.3.0" />

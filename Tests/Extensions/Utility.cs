@@ -47,7 +47,7 @@ namespace SharedUtils.Tests.Extensions
         [TestMethod]
         public void FormatDoubleObject_DoesDoubleObjectReturnCorrectly()
         {
-            double inputD = 33.123234;
+            const double inputD = 33.123234;
             object inputo = inputD;
             double? output = inputo.ToNullableDouble();
             Assert.AreEqual(inputD, output);
@@ -56,7 +56,7 @@ namespace SharedUtils.Tests.Extensions
         [TestMethod]
         public void FormatDoubleObject_DoesDecimalObjectReturnCorrectly()
         {
-            decimal inputDec = 33.123234M;
+            const decimal inputDec = 33.123234M;
             object inputo = inputDec;
             double? output = inputo.ToNullableDouble();
             Assert.AreEqual((double)inputDec, output);
@@ -65,7 +65,7 @@ namespace SharedUtils.Tests.Extensions
         [TestMethod]
         public void FormatDoubleObject_DoesStringObjectReturnCorrectly()
         {
-            string inputS = "33.123234";
+            const string inputS = "33.123234";
             object inputo = inputS;
             double? output = inputo.ToNullableDouble();
             Assert.AreEqual(Convert.ToDouble(inputS), output);
@@ -74,11 +74,11 @@ namespace SharedUtils.Tests.Extensions
         [TestMethod]
         public void DoubleObject_AlmostEquals()
         {
-            double d1 = 11.1111;
-            double d2 = 22.2222;
-            double d2a = 22.2221;
-            double d3 = 33;
-            double d3a = 33.00000001;
+            const double d1 = 11.1111;
+            const double d2 = 22.2222;
+            const double d2a = 22.2221;
+            const double d3 = 33;
+            const double d3a = 33.00000001;
             Assert.IsFalse(d1.AlmostEquals(d2));
             Assert.IsFalse(d2.AlmostEquals(d2a));
             Assert.IsTrue(d3.AlmostEquals(d3a));
@@ -112,7 +112,7 @@ namespace SharedUtils.Tests.Extensions
             bool? b = "false".ToNullableBoolean();
             Assert.IsFalse(b.Value);
         }
-        
+
 
         [TestMethod]
         public void FormatDateObject_DoesRandomTextGiveNullValue()
@@ -124,11 +124,11 @@ namespace SharedUtils.Tests.Extensions
         [TestMethod]
         public void FormatDateObject_DoTwoDifferentCulturesEqualEachOther()
         {
-            string sNLDate = "15/11/2015 13:30";
-            string sUSDate = "11/15/2015 1:30 PM";
+            const string sNLDate = "15/11/2015 13:30";
+            const string sUSDate = "11/15/2015 1:30 PM";
 
             DateTime? dNLDate = sNLDate.ToNullableDateTime(new System.Globalization.CultureInfo("nl-BE"));
-            DateTime? dUSDate =sUSDate.ToNullableDateTime(new System.Globalization.CultureInfo("en-US"));
+            DateTime? dUSDate = sUSDate.ToNullableDateTime(new System.Globalization.CultureInfo("en-US"));
             Assert.AreEqual(dNLDate, dUSDate);
         }
 

@@ -9,7 +9,7 @@ namespace SharedUtils.ExceptionHandling
     public class FileExceptionHandler : baseExceptionHandler
     {
 
-        private string m_fileLocation;
+        private readonly string m_fileLocation;
         public FileExceptionHandler(string fileLocation)
         {
             m_fileLocation = fileLocation;

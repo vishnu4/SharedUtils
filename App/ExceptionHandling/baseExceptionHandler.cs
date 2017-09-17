@@ -36,16 +36,16 @@ namespace SharedUtils.ExceptionHandling
             }
             sb.AppendLine("Type = " + theError.GetType().ToString());
             sb.AppendLine("");
-            if ((theError.Source != null) && theError.Source.Length > 0)
+            if (!string.IsNullOrEmpty(theError.Source))
             {
                 sb.AppendLine(nameof(theError.Source) + "= " + theError.Source);
             }
-            if ((theError.HelpLink != null) && theError.HelpLink.Length > 0)
+            if (!string.IsNullOrEmpty(theError.HelpLink))
             {
                 sb.AppendLine(nameof(theError.HelpLink) + "= " + theError.HelpLink);
             }
 
-            if ((theError.StackTrace != null) && theError.StackTrace.Length > 0)
+            if (!string.IsNullOrEmpty(theError.StackTrace))
             {
                 sb.AppendLine(" ");
                 sb.AppendLine(theError.StackTrace);
@@ -114,6 +114,6 @@ namespace SharedUtils.ExceptionHandling
 
     }
 
-    
-    
+
+
 }

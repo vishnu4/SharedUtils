@@ -21,12 +21,13 @@ namespace SharedUtils.Extensions
             {
                 return cacheManager.Get<T>(key);
             }
-            else
+            else if (acquire !=null)
             {
                 var result = acquire();
                 cacheManager.Set(key, result, cacheTime);
                 return result;
             }
+            return default(T);
         }
 
         public static async Task<T> GetAsync<T>(this ICacheManager cacheManager, string key, Func<Task<T>> acquire)
@@ -40,12 +41,13 @@ namespace SharedUtils.Extensions
             {
                 return await cacheManager.GetAsync<T>(key);
             }
-            else
+            else if (acquire !=null)
             {
                 var result = await acquire();
                 await cacheManager.SetAsync(key, result, cacheTime);
                 return result;
             }
+            return default(T);
         }
     }
 }
